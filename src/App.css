@@ -1,38 +1,59 @@
-.App {
-  text-align: center;
+.login-wrapper {
+  width: 50%;
+  margin: auto;
+  border: 2px solid #dadada;
+  background-color: white;
+  border-radius: 7px;
+  padding: 10px;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.login-wrapper:focus {
+  outline: none;
+  border-color: #9ecaed;
+  box-shadow: 0 0 10px #9ecaed;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+@media (max-width: 700px) {
+  .login-wrapper {
+    width: 80%;
+    margin: auto;
   }
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* .home-nav {
+  background-color: yellow;
+} */
+/* .resp-heading {
+  color: rgb(173, 226, 242);
+} */
+.dash-cont {
+  padding: 10px;
+}
+.dashboardPopupForm {
+  padding: 30px;
+}
+.h2-title {
+  font-family: serif;
+  color: #eb0083;
+}
+.addUser-button {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  flex-direction: row-reverse;
+  margin: 10px 0;
 }
-
-.App-link {
-  color: #61dafb;
+.general-signup:hover {
+  cursor: pointer;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.main-page-complete {
+  background: rgb(251, 1, 1);
+  background: linear-gradient(
+    90deg,
+    rgba(251, 1, 1, 0.950315160243785) 0%,
+    rgba(255, 55, 1, 0.8970938717283788) 100%
+  );
+  height: 100vh;
+}
+.main-page {
+  font-family: cursive;
+  color: rgb(255, 136, 0);
+  font-size: 100px;
+  text-align: center;
+  font-weight: bole;
 }

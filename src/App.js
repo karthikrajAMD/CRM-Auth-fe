@@ -1,24 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
-
+import "./App.css";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import Login from "./Component/Login";
+import AdminDashboard from "./Component/dashboard/AdminDashboard";
+import Home from "./Component/Home";
+import AdminLoginPage from "./Component/AdminLoginPage";
+import react, { useState } from "react";
+import { Context } from "./Context";
+import ServiceRequest from "./Component/ServiceRequest";
+import ManagerLoginPage from "./Component/ManagerLoginPage";
+import ManagerDashboard from "./Component/dashboard/ManagerDashboard";
+import EmployeeLoginPage from "./Component/EmployeeLoginPage";
+import UserDashboard from "./Component/dashboard/UserDashboard";
 function App() {
+  const [sideShow, setSideShow] = useState(false);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div>
+        <BrowserRouter>
+          <Context.Provider value={[sideShow, setSideShow]}>
+            <Routes>
+              <Route path="/home" element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/dashboard" element={<AdminDashboard />} />
+              <Route path="/manager_dashboard" element={<ManagerDashboard />} />
+              <Route path="/user_dashboard" element={<UserDashboard />} />
+              <Route path="/service_admin" element={<ServiceRequest />} />
+              <Route path="/admin" element={<AdminLoginPage />} />
+              <Route path="/manager" element={<ManagerLoginPage />} />
+              <Route path="/employee" element={<EmployeeLoginPage />} />
+              <Route path="*" element={<Navigate to="/home" />} />
+            </Routes>
+          </Context.Provider>
+        </BrowserRouter>
+      </div>
+    </>
   );
 }
 
