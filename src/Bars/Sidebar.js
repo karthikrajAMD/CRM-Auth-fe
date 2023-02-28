@@ -16,7 +16,7 @@ const Sidebar = () => {
         </div>
       </header>
 
-      <aside className={`sidebar ${sideShow ? "show" : null}`}>
+      <aside className={`sidebar ${sideShow ? "sideShow" : null}`}>
         <nav className="nav">
           <div>
             <Link to="/" className="nav-logo">

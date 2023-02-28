@@ -11,6 +11,7 @@ function ManagerLogin() {
   let [email, setEmail] = useState("");
   let [mShow, setMShow] = useState(false);
   let [password, setPassword] = useState("");
+  const [but, setBut] = useState(false);
   // .............................signup variable..............................
   let [firstName, setFirstName] = useState("");
   let [lastName, setLastName] = useState("");
@@ -19,6 +20,7 @@ function ManagerLogin() {
   let [confirmPassword, setConfirmPassword] = useState("");
   let navigate = useNavigate();
   const login = async () => {
+    setBut(true);
     let res = await axios.post(`${env.apiurl}/manager/login`, {
       email,
       password,
@@ -26,17 +28,20 @@ function ManagerLogin() {
     console.log(res.data);
     if (res.data.statusCode === 200) {
       sessionStorage.setItem("token", res.data.token);
-
+      sessionStorage.setItem("user-grade", "manager");
+      sessionStorage.setItem("userEmail", res.data.email);
       toast.success("Login Successfull!");
-
+      setBut(false);
       setTimeout(() => {
-        navigate("/manager");
+        navigate("/manager_dashboard");
       }, 3000);
     } else {
       toast.error(res.data.message);
+      setBut(false);
     }
   };
   const signup = async () => {
+    setBut(true);
     let res = await axios.post(`${env.apiurl}/manager/signup`, {
       firstName,
       lastName,
@@ -46,16 +51,17 @@ function ManagerLogin() {
     });
     if (res.data.statusCode === 200) {
       sessionStorage.setItem("token", res.data.token);
-
       toast.success("Signup Successfull!");
-
+      setBut(false);
       setTimeout(() => {
         setMShow(false);
       }, 3000);
     } else if (res.data.statusCode === 404) {
       toast.error(res.data.message);
+      setBut(false);
     } else {
       toast.error(res.data.message);
+      setBut(false);
     }
   };
   return (
@@ -65,6 +71,7 @@ function ManagerLogin() {
       {mShow ? (
         <div>
           <Button
+            className="signin-button"
             onClick={() => {
               setMShow(false);
             }}
@@ -73,11 +80,11 @@ function ManagerLogin() {
           </Button>
           <div className="login-wrapper">
             <Typography
-              style={{ textAlign: "center" }}
+              style={{ textAlign: "center", color: "blue" }}
               component="div"
-              variant="h4"
+              variant="h5"
             >
-              Manager Signup
+              Manager sign-up
             </Typography>
             <Form>
               <Form.Group className="mb-3">
@@ -121,7 +128,7 @@ function ManagerLogin() {
                   onChange={(e) => setConfirmPassword(e.target.value)}
                 />
               </Form.Group>
-              <Button variant="primary" onClick={() => signup()}>
+              <Button variant="primary" disabled={but} onClick={() => signup()}>
                 Submit
               </Button>
             </Form>
@@ -142,9 +149,9 @@ function ManagerLogin() {
       ) : (
         <div className="login-wrapper">
           <Typography
-            style={{ textAlign: "center" }}
+            style={{ textAlign: "center", color: "blue" }}
             component="div"
-            variant="h4"
+            variant="h5"
           >
             Manager Login
           </Typography>
@@ -166,7 +173,7 @@ function ManagerLogin() {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </Form.Group>
-            <Button variant="primary" onClick={() => login()}>
+            <Button variant="primary" disabled={but} onClick={() => login()}>
               Submit
             </Button>
             <Typography>

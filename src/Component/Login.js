@@ -13,28 +13,30 @@ function Login() {
   // .............................signup variable..............................
   let [firstName, setFirstName] = useState("");
   let [lastName, setLastName] = useState("");
-
+  const [but, setBut] = useState(false);
   let [confirmPassword, setConfirmPassword] = useState("");
   let navigate = useNavigate();
   const login = async () => {
+    setBut(true);
     let res = await axios.post(`${env.apiurl}/users/login`, {
       email,
       password,
     });
-    console.log(res.data);
     if (res.data.statusCode === 200) {
       sessionStorage.setItem("token", res.data.token);
-
+      sessionStorage.setItem("userEmail", res.data.email);
       toast.success("Login Successfull!");
-
+      setBut(false);
       setTimeout(() => {
-        navigate("/employee");
+        navigate("/user_dashboard");
       }, 3000);
     } else {
       toast.error(res.data.message);
+      setBut(false);
     }
   };
   const signup = async () => {
+    setBut(true);
     let res = await axios.post(`${env.apiurl}/users/signup`, {
       firstName,
       lastName,
@@ -46,14 +48,16 @@ function Login() {
       sessionStorage.setItem("token", res.data.token);
 
       toast.success("Signup Successfull!");
-
+      setBut(false);
       setTimeout(() => {
         setMShow(false);
       }, 3000);
     } else if (res.data.statusCode === 404) {
       toast.error(res.data.message);
+      setBut(false);
     } else {
       toast.error(res.data.message);
+      setBut(false);
     }
   };
   return (
@@ -61,6 +65,7 @@ function Login() {
       {mShow ? (
         <div>
           <Button
+            className="signin-button"
             onClick={() => {
               setMShow(false);
             }}
@@ -69,11 +74,11 @@ function Login() {
           </Button>
           <div className="login-wrapper">
             <Typography
-              style={{ textAlign: "center" }}
+              style={{ textAlign: "center", color: "blue" }}
               component="div"
-              variant="h4"
+              variant="h5"
             >
-              Employee Signup
+              Employee sign-up
             </Typography>
             <Form>
               <Form.Group className="mb-3">
@@ -117,7 +122,7 @@ function Login() {
                   onChange={(e) => setConfirmPassword(e.target.value)}
                 />
               </Form.Group>
-              <Button variant="primary" onClick={() => signup()}>
+              <Button variant="primary" disabled={but} onClick={() => signup()}>
                 Submit
               </Button>
             </Form>
@@ -138,9 +143,9 @@ function Login() {
       ) : (
         <div className="login-wrapper">
           <Typography
-            style={{ textAlign: "center" }}
+            style={{ textAlign: "center", color: "blue" }}
             component="div"
-            variant="h4"
+            variant="h5"
           >
             Employee Login
           </Typography>
@@ -162,7 +167,7 @@ function Login() {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </Form.Group>
-            <Button variant="primary" onClick={() => login()}>
+            <Button variant="primary" disabled={but} onClick={() => login()}>
               Submit
             </Button>
             <Typography>
@@ -175,7 +180,6 @@ function Login() {
                       setMShow(true);
                     }}
                   >
-                    {" "}
                     Signup
                   </a>{" "}
                   Here

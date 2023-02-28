@@ -12,12 +12,14 @@ import Form from "react-bootstrap/Form";
 import AddIcon from "@mui/icons-material/Add";
 import { Context } from "../../Context";
 import SidebarDashboard from "../../Bars/SidebarDashboard";
+import TaskAssign from "../Task/TaskAssign";
+import LoadingPage from "../../Loading/LoadingPage";
 function AdminDashboard() {
-  let [data, setData] = useState([]);
+  let [data, setData] = useState();
   let name = "Dashboard";
   const [sideShow, setSideShow] = useContext(Context);
-  let [mdata, setMdata] = useState([]);
-  let [adata, setAdata] = useState([]);
+  let [mdata, setMdata] = useState();
+  let [adata, setAdata] = useState();
   let [id, setId] = useState(0);
   let [firstN, setFirstN] = useState("");
   let [lastN, setLastN] = useState("");
@@ -500,36 +502,45 @@ function AdminDashboard() {
               </tr>
             </thead>
             <tbody>
-              {data.map((e, i) => {
-                return (
-                  <tr key={i}>
-                    <td>{i + 1}</td>
-                    <td>{e.firstName}</td>
-                    <td>{e.lastName}</td>
-                    <td>{e.email}</td>
-                    <td>{e.role}</td>
-                    <td>
-                      <Button
-                        variant="error"
-                        onClick={() => {
-                          setting({ e });
-                        }}
-                      >
-                        <EditIcon sx={{ color: "blue" }} onClick={handleShow} />
-                      </Button>
-                      <Button variant="error">
-                        <DeleteIcon
-                          fontSize="small"
-                          sx={{ color: "red" }}
+              {data ? (
+                data.map((e, i) => {
+                  return (
+                    <tr key={i}>
+                      <td>{i + 1}</td>
+                      <td>{e.firstName}</td>
+                      <td>{e.lastName}</td>
+                      <td>{e.email}</td>
+                      <td>{e.role}</td>
+                      <td>
+                        <Button
+                          variant="error"
                           onClick={() => {
-                            deleteUsers(e);
+                            setting({ e });
                           }}
-                        />
-                      </Button>
-                    </td>
-                  </tr>
-                );
-              })}
+                        >
+                          <EditIcon
+                            sx={{ color: "blue" }}
+                            onClick={handleShow}
+                          />
+                        </Button>
+                        <Button variant="error">
+                          <DeleteIcon
+                            fontSize="small"
+                            sx={{ color: "red" }}
+                            onClick={() => {
+                              deleteUsers(e);
+                            }}
+                          />
+                        </Button>
+                      </td>
+                    </tr>
+                  );
+                })
+              ) : (
+                <div className="page-loading">
+                  <LoadingPage />
+                </div>
+              )}
             </tbody>
           </Table>
           {/* manager.............................................................................. */}
@@ -564,36 +575,45 @@ function AdminDashboard() {
               </tr>
             </thead>
             <tbody>
-              {mdata.map((e, i) => {
-                return (
-                  <tr key={i}>
-                    <td>{i + 1}</td>
-                    <td>{e.firstName}</td>
-                    <td>{e.lastName}</td>
-                    <td>{e.email}</td>
-                    <td>{e.role}</td>
-                    <td>
-                      <Button
-                        variant="error"
-                        onClick={() => {
-                          setting({ e });
-                        }}
-                      >
-                        <EditIcon sx={{ color: "blue" }} onClick={handleShow} />
-                      </Button>
-                      <Button variant="error">
-                        <DeleteIcon
-                          fontSize="small"
-                          sx={{ color: "red" }}
+              {mdata ? (
+                mdata.map((e, i) => {
+                  return (
+                    <tr key={i}>
+                      <td>{i + 1}</td>
+                      <td>{e.firstName}</td>
+                      <td>{e.lastName}</td>
+                      <td>{e.email}</td>
+                      <td>{e.role}</td>
+                      <td>
+                        <Button
+                          variant="error"
                           onClick={() => {
-                            deleteManager(e);
+                            setting({ e });
                           }}
-                        />
-                      </Button>
-                    </td>
-                  </tr>
-                );
-              })}
+                        >
+                          <EditIcon
+                            sx={{ color: "blue" }}
+                            onClick={handleShow}
+                          />
+                        </Button>
+                        <Button variant="error">
+                          <DeleteIcon
+                            fontSize="small"
+                            sx={{ color: "red" }}
+                            onClick={() => {
+                              deleteManager(e);
+                            }}
+                          />
+                        </Button>
+                      </td>
+                    </tr>
+                  );
+                })
+              ) : (
+                <div className="page-loading">
+                  <LoadingPage />
+                </div>
+              )}
             </tbody>
           </Table>
           {/* ..................................................admin.......................................... */}
@@ -628,36 +648,45 @@ function AdminDashboard() {
               </tr>
             </thead>
             <tbody>
-              {adata.map((e, i) => {
-                return (
-                  <tr key={i}>
-                    <td>{i + 1}</td>
-                    <td>{e.firstName}</td>
-                    <td>{e.lastName}</td>
-                    <td>{e.email}</td>
-                    <td>{e.role}</td>
-                    <td>
-                      <Button
-                        variant="error"
-                        onClick={() => {
-                          setting({ e });
-                        }}
-                      >
-                        <EditIcon sx={{ color: "blue" }} onClick={handleShow} />
-                      </Button>
-                      <Button variant="error">
-                        <DeleteIcon
-                          fontSize="small"
-                          sx={{ color: "red" }}
+              {adata ? (
+                adata.map((e, i) => {
+                  return (
+                    <tr key={i}>
+                      <td>{i + 1}</td>
+                      <td>{e.firstName}</td>
+                      <td>{e.lastName}</td>
+                      <td>{e.email}</td>
+                      <td>{e.role}</td>
+                      <td>
+                        <Button
+                          variant="error"
                           onClick={() => {
-                            deleteAdmin(e);
+                            setting({ e });
                           }}
-                        />
-                      </Button>
-                    </td>
-                  </tr>
-                );
-              })}
+                        >
+                          <EditIcon
+                            sx={{ color: "blue" }}
+                            onClick={handleShow}
+                          />
+                        </Button>
+                        <Button variant="error">
+                          <DeleteIcon
+                            fontSize="small"
+                            sx={{ color: "red" }}
+                            onClick={() => {
+                              deleteAdmin(e);
+                            }}
+                          />
+                        </Button>
+                      </td>
+                    </tr>
+                  );
+                })
+              ) : (
+                <div className="page-loading">
+                  <LoadingPage />
+                </div>
+              )}
             </tbody>
           </Table>
           {/* ............................................................................end of table...................... */}
@@ -678,6 +707,9 @@ function AdminDashboard() {
             theme="light"
           />
         </div>
+      </div>
+      <div>
+        <TaskAssign />
       </div>
     </main>
   );

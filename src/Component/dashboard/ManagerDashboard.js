@@ -11,9 +11,10 @@ import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import AddIcon from "@mui/icons-material/Add";
 import { Context } from "../../Context";
+import LoadingPage from "../../Loading/LoadingPage";
 import SidebarDashboard from "../../Bars/SidebarDashboard";
 function ManagerDashboard() {
-  let [data, setData] = useState([]);
+  let [data, setData] = useState();
   const [sideShow, setSideShow] = useContext(Context);
   const [show0, setShow0] = useState(false);
   const [show1, setShow1] = useState(false);
@@ -271,36 +272,45 @@ function ManagerDashboard() {
               </tr>
             </thead>
             <tbody>
-              {data.map((e, i) => {
-                return (
-                  <tr key={i}>
-                    <td>{i + 1}</td>
-                    <td>{e.firstName}</td>
-                    <td>{e.lastName}</td>
-                    <td>{e.email}</td>
-                    <td>{e.role}</td>
-                    <td>
-                      <Button
-                        variant="error"
-                        onClick={() => {
-                          setting({ e });
-                        }}
-                      >
-                        <EditIcon sx={{ color: "blue" }} onClick={handleShow} />
-                      </Button>
-                      <Button variant="error">
-                        <DeleteIcon
-                          fontSize="small"
-                          sx={{ color: "red" }}
+              {data ? (
+                data.map((e, i) => {
+                  return (
+                    <tr key={i}>
+                      <td>{i + 1}</td>
+                      <td>{e.firstName}</td>
+                      <td>{e.lastName}</td>
+                      <td>{e.email}</td>
+                      <td>{e.role}</td>
+                      <td>
+                        <Button
+                          variant="error"
                           onClick={() => {
-                            deleteUsers(e);
+                            setting({ e });
                           }}
-                        />
-                      </Button>
-                    </td>
-                  </tr>
-                );
-              })}
+                        >
+                          <EditIcon
+                            sx={{ color: "blue" }}
+                            onClick={handleShow}
+                          />
+                        </Button>
+                        <Button variant="error">
+                          <DeleteIcon
+                            fontSize="small"
+                            sx={{ color: "red" }}
+                            onClick={() => {
+                              deleteUsers(e);
+                            }}
+                          />
+                        </Button>
+                      </td>
+                    </tr>
+                  );
+                })
+              ) : (
+                <div className="page-loading">
+                  <LoadingPage />
+                </div>
+              )}
             </tbody>
           </Table>
           {/* ............................................................................end of table...................... */}

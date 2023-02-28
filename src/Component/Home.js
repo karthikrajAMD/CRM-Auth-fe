@@ -4,6 +4,8 @@ import ResponsiveDrawer from "../Bars/ResponsiveDrawer";
 function Home() {
   let loadData = async () => {
     let token = sessionStorage.setItem("token", "");
+    let email = sessionStorage.setItem("userEmail", "");
+    let grade = sessionStorage.setItem("user-grade", "");
   };
   useEffect(() => {
     loadData();

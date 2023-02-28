@@ -9,25 +9,29 @@ import { Typography } from "@mui/material";
 function AdminLogin() {
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
+  const [but, setBut] = useState(false);
   let navigate = useNavigate();
   const center = {
     textAlign: "center",
   };
   const login = async () => {
+    setBut(true);
     let res = await axios.post(`${env.apiurl}/admin/login`, {
       email,
       password,
     });
     if (res.data.statusCode === 200) {
       sessionStorage.setItem("token", res.data.token);
-
+      sessionStorage.setItem("user-grade", "admin");
+      sessionStorage.setItem("userEmail", res.data.email);
       toast.success("Login Successfull!");
-
+      setBut(false);
       setTimeout(() => {
-        navigate("/admin");
+        navigate("/dashboard");
       }, 3000);
     } else {
       toast.error(res.data.message);
+      setBut(false);
     }
   };
   return (
@@ -54,14 +58,22 @@ function AdminLogin() {
               onChange={(e) => setPassword(e.target.value)}
             />
           </Form.Group>
-          <Button variant="primary" onClick={() => login()}>
+          <Button variant="primary" disabled={but} onClick={() => login()}>
             Submit
           </Button>
           <Form.Group className="mb-3">
-            <Typography variant="h5">
-              Email:karthikraja.a.ece@gmail.com
-            </Typography>
-            <Typography variant="h5">Password:admin</Typography>
+            {/* <Typography variant="h6" style={{ padding: "5px" }}> */}
+            Email:
+            <span style={{ fontWeight: "bold" }}>
+              karthikraja.a.ece@gmail.com
+            </span>
+            {/* </Typography> */}
+            {/* <Typography variant="h6" style={{ padding: "5px" }}> */}
+            <div>
+              Password:
+              <span style={{ fontWeight: "bold" }}>admin</span>
+            </div>
+            {/* </Typography> */}
           </Form.Group>
         </Form>
         <ToastContainer

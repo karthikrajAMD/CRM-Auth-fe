@@ -2,10 +2,16 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../Context";
 import { ToastContainer } from "react-toastify";
+import TaskIcon from "@mui/icons-material/Task";
+import Person2Icon from "@mui/icons-material/Person2";
+import HomeIcon from "@mui/icons-material/Home";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import LogoutIcon from "@mui/icons-material/Logout";
+import HomeRepairServiceIcon from "@mui/icons-material/HomeRepairService";
 import "../Sidebar.css";
 function SidebarDashboard(props) {
   const [sideShow, setSideShow] = useContext(Context);
-
+  const grade = sessionStorage.getItem("user-grade");
   return (
     <>
       <div>
@@ -30,14 +36,18 @@ function SidebarDashboard(props) {
               <nav className="nav">
                 <div>
                   <Link to="/" className="nav-logo">
-                    <i className={`fas fa-home-alt nav-logo-icon`}></i>
+                    <HomeIcon />
                     <span className="nav-logo-name">Homepage</span>
                   </Link>
 
                   <div className="nav-list">
                     <Link to="/user_dashboard" className="nav-link active">
-                      <i className="fas fa-tachometer-alt nav-link-icon"></i>
+                      <DashboardIcon />
                       <span className="nav-link-name">Dashboard</span>
+                    </Link>
+                    <Link to="/user_task" className="nav-link">
+                      <TaskIcon />
+                      <span className="nav-link-name">Task Page</span>
                     </Link>
                     {/* <Link to="/hotel" className="nav-link">
                       <i className="fas fa-hotel nav-link-icon"></i>
@@ -55,7 +65,8 @@ function SidebarDashboard(props) {
                 </div>
 
                 <Link to="/home" className="nav-link">
-                  <i className="fas fa-sign-out nav-link-icon"></i>
+                  {/* <i className="fas fa-sign-out nav-link-icon"></i> */}
+                  <LogoutIcon />
                   <span className="nav-link-name">Logout</span>
                 </Link>
               </nav>
@@ -89,37 +100,40 @@ function SidebarDashboard(props) {
                   <div className="nav-list">
                     <Link
                       to={
-                        props.role === "manager"
+                        grade === "manager"
                           ? "/manager_dashboard"
                           : "/dashboard"
                       }
                       className="nav-link active"
                     >
-                      <i className="fas fa-tachometer-alt nav-link-icon"></i>
+                      {/* <i className="fas fa-tachometer-alt nav-link-icon"></i> */}
+                      <DashboardIcon />
                       <span className="nav-link-name">Dashboard</span>
                     </Link>
                     <Link
                       to={
-                        props.role === "manager"
-                          ? "/manager_dashboard"
-                          : "/dashboard"
+                        grade === "manager"
+                          ? "/managerProfile"
+                          : "/adminProfile"
                       }
                       className="nav-link"
                     >
-                      <i className="fas fa-hotel nav-link-icon"></i>
+                      {/* <i className="fas fa-hotel nav-link-icon"></i> */}
+                      <Person2Icon />
                       <span className="nav-link-name">Profile</span>
                     </Link>
-                    <Link
+
+                    {/* <Link
                       to={
-                        props.role === "manager"
+                        grade === "manager"
                           ? "/manager_dashboard"
                           : "/service_admin"
                       }
                       className="nav-link"
                     >
-                      <i className="fas fa-image nav-link-icon"></i>
+                      <HomeRepairServiceIcon />
                       <span className="nav-link-name">Service Request</span>
-                    </Link>
+                    </Link> */}
                     {/* <Link
                       to={
                         props.role === "manager"
@@ -135,7 +149,7 @@ function SidebarDashboard(props) {
                 </div>
 
                 <Link to="/home" className="nav-link">
-                  <i className="fas fa-sign-out nav-link-icon"></i>
+                  <LogoutIcon />
                   <span className="nav-link-name">Logout</span>
                 </Link>
               </nav>
