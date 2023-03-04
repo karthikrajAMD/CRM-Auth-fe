@@ -118,8 +118,9 @@ function ManagerDashboard() {
   }, []);
 
   return (
-    <main className={sideShow ? "space-toggle" : null}>
-      <SidebarDashboard name={name} role={"manager"} />
+    <div className="container">
+      {/* <main className={sideShow ? "space-toggle" : null}>
+     <SidebarDashboard name={name} role={"manager"} /> */}
       {/* ........................................dashboard content........................................................................ */}
       <div className="dash-cont">
         <Modal show={show0} onHide={handleClose}>
@@ -332,7 +333,9 @@ function ManagerDashboard() {
           />
         </div>
       </div>
-    </main>
+
+      {/* </main> */}
+    </div>
   );
 }
 

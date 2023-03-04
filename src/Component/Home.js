@@ -6,6 +6,7 @@ function Home() {
     let token = sessionStorage.setItem("token", "");
     let email = sessionStorage.setItem("userEmail", "");
     let grade = sessionStorage.setItem("user-grade", "");
+    let name = sessionStorage.setItem("name", "");
   };
   useEffect(() => {
     loadData();

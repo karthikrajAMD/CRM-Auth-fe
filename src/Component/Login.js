@@ -25,12 +25,14 @@ function Login() {
     if (res.data.statusCode === 200) {
       sessionStorage.setItem("token", res.data.token);
       sessionStorage.setItem("userEmail", res.data.email);
-      toast.success("Login Successfull!");
+      sessionStorage.setItem("name", res.data.name);
+      toast.success("Login Successful!");
       setBut(false);
       setTimeout(() => {
         navigate("/user_dashboard");
       }, 3000);
     } else {
+      console.log("error");
       toast.error(res.data.message);
       setBut(false);
     }
@@ -184,6 +186,22 @@ function Login() {
                   </a>{" "}
                   Here
                 </h6>
+              </div>
+            </Typography>
+            <Typography>
+              <div className="demo-login">
+                <div className="demo-login-h5">
+                  <h5 className="h55">Demo Login1:</h5>
+                  <h5>d@gmail.com</h5>
+                </div>
+                <div className="demo-login-h5">
+                  <h5 className="h55">Demo Login2:</h5>
+                  <h5>m@gmail.com</h5>
+                </div>
+                <div className="demo-login-h5">
+                  <h5 className="h55">Password:</h5>
+                  <h5>password</h5>
+                </div>
               </div>
             </Typography>
           </Form>

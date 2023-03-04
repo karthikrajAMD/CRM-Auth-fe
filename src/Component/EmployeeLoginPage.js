@@ -110,7 +110,7 @@ function EmployeeLoginPage() {
   return (
     <>
       <main className={sideShow ? "space-toggle" : null}>
-        <SidebarDashboard role={"user"} />
+        <SidebarDashboard role={"user"} select={"dash"} />
         <Modal show={show0} onHide={handleClose}>
           <Modal.Header closeButton>
             <Modal.Title>Update your database</Modal.Title>

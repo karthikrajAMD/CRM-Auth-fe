@@ -219,7 +219,7 @@ function AdminDashboard() {
 
   return (
     <main className={sideShow ? "space-toggle" : null}>
-      <SidebarDashboard name={name} role={"admin"} />
+      <SidebarDashboard name={name} role={"admin"} select={"dash"} />
       {/* ........................................dashboard content........................................................................ */}
       <div className="dash-cont">
         <Modal show={show0} onHide={handleClose}>

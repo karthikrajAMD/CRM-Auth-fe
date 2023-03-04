@@ -123,9 +123,6 @@ function TaskAssign() {
   }, [trigger]);
   return (
     <div>
-      <main className={sideShow ? "space-toggle" : null}>
-        <SidebarDashboard name={name} role={"admin"} />
-      </main>
       <div className="dash-cont">
         <div className="addUser-button">
           <Button variant="primary">

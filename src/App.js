@@ -15,6 +15,7 @@ import TaskAssign from "./Component/Task/TaskAssign";
 import ManagerTaskAssign from "./Component/Task/ManagerTaskAssign";
 import ManagerProfile from "./Component/Profile/ManagerProfile";
 import AdminProfile from "./Component/Profile/AdminProfile";
+import Chat from "./chat/chat";
 function App() {
   const [sideShow, setSideShow] = useState(false);
   return (
@@ -32,6 +33,7 @@ function App() {
               <Route path="/managerProfile" element={<ManagerProfile />} />
               <Route path="/adminProfile" element={<AdminProfile />} />
               <Route path="/task_assign_page" element={<TaskAssign />} />
+              <Route path="/chat" element={<Chat />} />
               <Route
                 path="/manager_dashboard"
                 element={<ManagerTaskAssign />}

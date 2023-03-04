@@ -44,7 +44,7 @@ function UserTaskPage() {
   return (
     <div>
       <main className={sideShow ? "space-toggle" : null}>
-        <SidebarDashboard name={name} role={"user"} />
+        <SidebarDashboard name={name} role={"user"} select={"task"} />
       </main>
       <div className="container">
         '

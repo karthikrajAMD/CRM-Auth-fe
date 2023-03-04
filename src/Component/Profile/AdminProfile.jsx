@@ -111,7 +111,7 @@ function AdminProfile() {
   }, []);
   return (
     <main className={sideShow ? "space-toggle" : null}>
-      <SidebarDashboard role={"manager"} />
+      <SidebarDashboard role={"manager"} select={"profile"} />
       <Modal show={show0} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Update your database</Modal.Title>

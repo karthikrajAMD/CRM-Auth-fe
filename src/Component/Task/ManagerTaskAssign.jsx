@@ -17,7 +17,7 @@ import LoadingPage from "../../Loading/LoadingPage";
 import { env } from "../../environment";
 function ManagerTaskAssign() {
   let navigate = useNavigate();
-  let name = "TaskAssignPage";
+  let name = "Dashboard";
   const [sideShow, setSideShow] = useContext(Context);
   const [show0, setShow0] = useState(false);
   const [show1, setShow1] = useState(false);
@@ -112,7 +112,7 @@ function ManagerTaskAssign() {
   return (
     <div>
       <main className={sideShow ? "space-toggle" : null}>
-        <SidebarDashboard name={name} role={"admin"} />
+        <SidebarDashboard name={name} role={"manager"} select={"dash"} />
       </main>
       <div className="dash-cont">
         <div className="addUser-button">

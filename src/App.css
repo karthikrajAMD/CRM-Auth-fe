@@ -71,3 +71,19 @@
   display: flex;
   justify-content: center;
 }
+
+.demo-login {
+  display: flex;
+  flex-direction: column;
+  box-shadow: 2px 2px 4px black;
+  padding: 5px;
+}
+.demo-login-h5 {
+  display: flex;
+  justify-content: flex-start;
+}
+.h55 {
+  color: red;
+  font-weight: bold;
+  text-transform: uppercase;
+}
